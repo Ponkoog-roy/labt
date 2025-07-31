@@ -14,7 +14,8 @@ jobs:
         run: npm install
         working-directory: "./Practice Project (Start)"
       - name: Run tests
-        run: npm test
+        run: npm run
+        working-directory: "./Practice Project (Start)"
 
   deploy:
     runs-on: ubuntu-latest

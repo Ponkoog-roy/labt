@@ -36,3 +36,9 @@ jobs:
       - name: Deploy project
         run: echo "Deploying project..."
         working-directory: "./Practice Project (Start)"
+  information:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps: 
+      - name: print output
+        run: echo "{{ toJSON(github) }}"

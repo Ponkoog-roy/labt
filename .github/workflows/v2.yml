@@ -18,6 +18,7 @@ jobs:
         working-directory: "./Practice Project (Start)"
 
   deploy:
+    needs: modify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,6 +29,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
+        working-directory: "./Practice Project (Start)"
       - name: Run tests
         run: npm run lint 
         working-directory: "./Practice Project (Start)"

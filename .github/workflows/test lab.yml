@@ -1,10 +1,33 @@
-name: test project
-on: push
+name: deploy project in parallel
+on: [push , workflow_dispatch]
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    -  name:
-       uses:
-    -  name:
-       uses:
-    
+  modify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Modify file
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      -  name: Install dependencies
+         run: npm install
+      -  name: Run tests
+         run: npm test
+  
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      -  name: Install dependencies
+         run: npm ci
+      -  name: build test project
+         run: npm run build
+      -  name: Deploy project
+         run: echo "Deploying project..." 

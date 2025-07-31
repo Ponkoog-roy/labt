@@ -1,0 +1,10 @@
+name: test project
+on: push
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    -  name:
+       uses:
+    -  name:
+       uses:
+    

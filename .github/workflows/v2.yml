@@ -1,0 +1,45 @@
+name: deploy project in parallel
+on: [push, workflow_dispatch]
+jobs:
+  modify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Modify file
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install
+        working-directory: "./Practice Project (Start)"
+      - name: Run lint
+        run: npm run lint 
+        working-directory: "./Practice Project (Start)"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run lint 
+        working-directory: "./Practice Project (Start)"
+      - name: build test project
+        run: npm run build
+        working-directory: "./Practice Project (Start)"
+      - name: Deploy project
+        run: echo "Deploying project..."
+        working-directory: "./Practice Project (Start)"
+  information:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps: 
+      - name: print output
+        run: echo "${{ toJSON(github) }}"

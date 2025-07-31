@@ -18,6 +18,7 @@ jobs:
         working-directory: "./Practice Project (Start)"
 
   deploy:
+    needs: modify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
